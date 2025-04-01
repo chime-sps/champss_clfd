@@ -33,7 +33,10 @@ class ArchiveHandler:
         data_cube = self._archive.get_data()
 
         # Scunch polarizations into total intensity
-        data_cube = data_cube[:, (0, 1)].mean(axis=1)
+        if data_cube.shape[1] > 1: # if there are multiple polarizations
+            data_cube = data_cube[:, (0, 1)].mean(axis=1) # average over polarizations 
+        else: 
+            data_cube = data_cube[:, 0, :, :] # only one polarization
 
         return data_cube
 
