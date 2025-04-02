@@ -27,6 +27,7 @@ def process_file(
     despike: bool = False,
     qspike: float = 4.0,
     save_report: bool = False,
+    extension: str = "clfd",
 ) -> Path:
     """
     Process a single archive file end to end. Returns the path to the output
@@ -48,8 +49,11 @@ def process_file(
     else:
         sf_result = None
 
+    if not extension.startswith("."):
+        extension = "." + extension
+
     outdir = Path(outdir).resolve() if outdir else path.parent
-    output_path = outdir / (path.name + ".clfd")
+    output_path = outdir / (path.name + extension)
     handler.save(output_path)
 
     if save_report:

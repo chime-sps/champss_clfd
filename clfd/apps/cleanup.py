@@ -92,6 +92,13 @@ def make_parser():
         ),
     )
     parser.add_argument(
+        "-e",
+        "--ext",
+        type=str,
+        default="clfd",
+        help="Additional extension given to the clean output files.",
+    )
+    parser.add_argument(
         "-p",
         "--processes",
         type=int,
@@ -215,6 +222,7 @@ def run_program(cli_args: list[str]):
             "despike": args.despike,
             "qspike": args.qspike,
             "save_report": not args.no_report,
+            "extension": args.ext,
         }
     )
 
